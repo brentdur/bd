@@ -16,3 +16,11 @@ Route::get('about', 'PagesController@about');
 Route::get('lists', 'PagesController@lists');
 
 Route::get('/', 'PagesController@home');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/articles', 'ArticlesController@index');
+
+
+Route::get('articles/{id}', 'ArticlesController@show');

@@ -8,7 +8,7 @@
 
 @foreach ($articles as $article)
 	<article>
-		<a href="{{ action('ArticlesController@show', [$article-id]) }}"> {{ $article->titile }}</a>
+		<a href="{{ action('ArticlesController@show', [$article->id]) }}"> {{ $article->title }}</a>
 		<p> {{ $article->body }}</p>
 	</article>
 @endforeach

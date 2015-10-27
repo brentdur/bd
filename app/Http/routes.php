@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('about', 'PagesController@about');
+Route::get('about', ['middleware'=>'auth', 'PagesController@about']);
 
 Route::get('lists', 'PagesController@lists');
 
@@ -20,10 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/articles', 'ArticlesController@index');
 
-Route::get('articles/create', 'ArticlesController@create');
+Route::resource('articles', 'ArticlesController');
 
-Route::get('articles/{id}', 'ArticlesController@show');
-
-Route::post('articles', 'ArticlesController@store');
+Route::controllers([
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController'
+	]);

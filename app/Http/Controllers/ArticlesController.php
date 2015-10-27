@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Article;
-use Request;
+// use Request;
+use App\Http\Requests\ArticleRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class ArticlesController extends Controller
 {
+
+    public function __construct() {
+
+        $this->middleware('auth', ['only'=>'create']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +22,8 @@ class ArticlesController extends Controller
      */
     public function index()
     {
+
+        // return \Auth::user();
         $articles = Article::latest('published_at')->published()->get();
 
         return view('articles.index')->with('articles', $articles);
@@ -37,11 +45,13 @@ class ArticlesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
 
-        $input = Request::all();
-        Article::create($input);
+        $article = Article::create($request->all());
+        \Auth::user()->articles()->save($article);
+
+        session()->flash('flash_message', 'Your article has been created');
         return redirect('articles');
     }
 
@@ -51,10 +61,8 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Article $article)
     {
-        $article = Article::findOrFail($id);
-        
         return view('articles.single', compact('article'));
     }
 
@@ -64,9 +72,9 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
-        //
+        return view('articles.edit', compact('article'));
     }
 
     /**
@@ -76,9 +84,12 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ArticleRequest $request, Article $article)
     {
-        //
+
+        $article->update($request->all());
+
+        return redirect('articles');
     }
 
     /**

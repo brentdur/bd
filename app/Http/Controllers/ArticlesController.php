@@ -36,7 +36,8 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        $tags = \App\Tag::lists('name', 'id');
+        return view('articles.create', compact('tags'));
     }
 
     /**
@@ -48,7 +49,12 @@ class ArticlesController extends Controller
     public function store(ArticleRequest $request)
     {
 
+
         $article = Article::create($request->all());
+
+        $article->tags()->sync($request->input('tag_list'));
+
+
         \Auth::user()->articles()->save($article);
 
         session()->flash('flash_message', 'Your article has been created');
@@ -74,7 +80,8 @@ class ArticlesController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('articles.edit', compact('article'));
+        $tags = \App\Tag::lists('name', 'id');
+        return view('articles.edit', compact('article', 'tags'));
     }
 
     /**
@@ -88,6 +95,8 @@ class ArticlesController extends Controller
     {
 
         $article->update($request->all());
+
+        $article->tags()->sync($request->input('tag_list'));
 
         return redirect('articles');
     }

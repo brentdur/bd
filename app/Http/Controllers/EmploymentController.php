@@ -43,7 +43,7 @@ class EmploymentController extends Controller
      */
     public function store(Request $request)
     {
-        $employment->create($request);
+        Employment::create($request->all());
         return redirect('employment');
     }
 
@@ -67,7 +67,8 @@ class EmploymentController extends Controller
      */
     public function edit($id)
     {
-        return view('employment.edit')-with('employment', $employment);
+        $employment = Employment::findOrFail($id);
+        return view('employment.edit')->with('employment', $employment);
     }
 
     /**
@@ -79,7 +80,9 @@ class EmploymentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Employment::findOrFail($id)->update($request);
+        $employ = Employment::findOrFail($id);
+        // dd($request->all());
+        Employment::findOrFail($id)->update($request->all());
         return redirect('employment');
     }
 

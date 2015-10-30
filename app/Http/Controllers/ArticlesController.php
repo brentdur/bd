@@ -26,7 +26,7 @@ class ArticlesController extends Controller
         // return \Auth::user();
         $articles = Article::latest('published_at')->published()->get();
 
-        return view('articles.index')->with('articles', $articles);
+        return view('articles.index', compact('articles'));
     }
 
     /**
@@ -81,7 +81,7 @@ class ArticlesController extends Controller
     public function edit(Article $article)
     {
         $tags = \App\Tag::lists('name', 'id');
-        return view('articles.edit', compact('article', 'tags'));
+        return view('articles.edit', compact('article', 'tags', 'userTags'));
     }
 
     /**

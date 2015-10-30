@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('about', ['middleware'=>'auth', 'PagesController@about']);
+
+Route::get('foo', 'FooController@foo');
 
 Route::get('lists', 'PagesController@lists');
 
@@ -27,3 +28,5 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController'
 	]);
+
+Route::get('tags/{tag}', 'TagsController@show')

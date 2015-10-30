@@ -23,6 +23,10 @@ class Article extends Model
     	$this->attributes['published_at'] = Carbon::parse($date);
     }
 
+    public function getPublishedAtAttribute(){
+        return new Carbon($date);
+    }
+
     public function scopePublished($query){
     	$query->where('published_at', '<=', Carbon::now());
     }
@@ -37,7 +41,7 @@ class Article extends Model
         return $this->belongsToMany('App\Tag')->withTimestamps();
     }
 
-    public function getTagListAttribute()
+    public function getTagsListAttribute()
     {
         return $this->tags->lists('id');
     }

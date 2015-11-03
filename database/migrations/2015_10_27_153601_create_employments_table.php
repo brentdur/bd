@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticlesTable extends Migration
+class CreateEmploymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,18 +12,14 @@ class CreateArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('employments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->string('employer');
             $table->string('title');
             $table->text('body');
+            $table->timestamp('start_date');
+            $table->timestamp('end_date')->nullable();
             $table->timestamps();
-            $table->timestamp('published_at')->nullable();
-
-            $table->foreign('user_id')
-                  ->references('id')
-                  ->on('users')
-                  ->onDelete('cascade');
         });
     }
 
@@ -34,6 +30,6 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('articles');
+        Schema::drop('employments');
     }
 }

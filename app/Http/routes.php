@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::resource('employment', 'EmploymentController');
+Route::resource('skill', 'SkillController');
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

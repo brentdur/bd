@@ -24,12 +24,5 @@ class Employment extends Model
     	$this->attributes['end_date'] = Carbon::parse($date);
   	}    
 
-  	public function getEndDateAttribute(){
-  		if ($this->attributes['end_date']) {
-  			return $this->attributes['end_date']->format('Y-m-d');
-  		}
-  		else {
-  			return null;
-  		}
-  	}
+
 }

@@ -1,9 +1,8 @@
-@extends ('app')
 
 @section('content')
 
 <h2> Edit Employment: </h2>
-{{ $employment->end_date}}
+
 <hr />
 
 	{!! Form::model($employment, ['method' => 'PATCH', 'action' => ['EmploymentController@update', $employment->id]])	!!}
@@ -41,7 +40,7 @@
 
 		<div class="form-group">
 			{!! Form::label('end_date', 'End Date') !!}
-			{!! Form::input('date', 'end_date', $employment->end_date, ['class' => 'form-control']) !!}
+			{!! Form::input('date', 'end_date', $employment->end_date->format('Y-m-d'), ['class' => 'form-control']) !!}
 		
 
 		</div>

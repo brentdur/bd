@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Employment;
+use App\Skill;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class EmploymentController extends Controller
+class SkillController extends Controller
 {
 
     public function __construct(){
         $this->middleware('auth', ['only'=>'create']);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +22,8 @@ class EmploymentController extends Controller
      */
     public function index()
     {
-        $employments = Employment::get();
-        return view('employment.index')->with('employments', $employments);
+        $skills = Skill::get();
+        return view('skill.index')->with('skills', $skills);
     }
 
     /**
@@ -32,7 +33,7 @@ class EmploymentController extends Controller
      */
     public function create()
     {
-        return view('employment.create');
+        return view ('skill.create');
     }
 
     /**
@@ -43,8 +44,8 @@ class EmploymentController extends Controller
      */
     public function store(Request $request)
     {
-        Employment::create($request->all());
-        return redirect('employment');
+        Skill::create($request->all());
+        return redirect('skill');
     }
 
     /**
@@ -55,8 +56,8 @@ class EmploymentController extends Controller
      */
     public function show($id)
     {
-        $employment = Employment::findOrFail($id);
-        return view('employment.single')->with('employment', $employment);
+        $skill = Skill::findOrFail($id);
+        return view('skill.single')->with('skill', $skill);
     }
 
     /**
@@ -67,8 +68,8 @@ class EmploymentController extends Controller
      */
     public function edit($id)
     {
-        $employment = Employment::findOrFail($id);
-        return view('employment.edit')->with('employment', $employment);
+        $skill = SKill::findOrFail($id);
+        return view('skill.edit')->with('skill', $skill);
     }
 
     /**
@@ -80,8 +81,8 @@ class EmploymentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $employ = Employment::findOrFail($id)->update($request->all());
-        return redirect('employment');
+        Skill::findOrFail($id)->update($request->all());
+        return redirect('skill');
     }
 
     /**

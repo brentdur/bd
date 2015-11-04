@@ -21,7 +21,13 @@ class Employment extends Model
     	$this->attributes['start_date'] = Carbon::parse($date);
   	}
 	public function setEndDateAttribute($date){
-    	$this->attributes['end_date'] = Carbon::parse($date);
+
+        if ($date == ""){
+            $this->attributes['end_date'] = null;
+        }
+        else {
+    	   $this->attributes['end_date'] = Carbon::parse($date);
+        }
   	}    
 
 

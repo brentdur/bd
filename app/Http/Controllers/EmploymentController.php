@@ -68,7 +68,12 @@ class EmploymentController extends Controller
     public function edit($id)
     {
         $employment = Employment::findOrFail($id);
-        return view('employment.edit')->with('employment', $employment);
+        $start_date = $employment->start_date->format('Y-m-d');
+        $end_date = "";
+        if($employment->end_date != "") {
+            $end_date = $employment->end_date->format('Y-m-d');
+        }
+        return view('employment.edit')->with('employment', $employment)->with('start_date', $start_date)->with('end_date', $end_date);
     }
 
     /**

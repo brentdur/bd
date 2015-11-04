@@ -1,3 +1,4 @@
+@extends('app')
 
 @section('content')
 
@@ -34,19 +35,19 @@
 		<div class="form-group">
 
 			{!! Form::label('start_date', 'Start Date') !!}
-			{!! Form::input('date', 'start_date', $employment->start_date->format('Y-m-d'), ['class' => 'form-control']) !!}
+			{!! Form::input('date', 'start_date', $start_date, ['class' => 'form-control']) !!}
 
 		</div>
 
 		<div class="form-group">
 			{!! Form::label('end_date', 'End Date') !!}
-			{!! Form::input('date', 'end_date', $employment->end_date->format('Y-m-d'), ['class' => 'form-control']) !!}
+			{!! Form::input('date', 'end_date', $end_date, ['class' => 'form-control']) !!}
 		
 
 		</div>
 
 		<div class="form-group">
-			{!! Form::submit('Update Article', ['class' => 'btn btn-primary form-control']) !!}
+			{!! Form::submit('Update Employment', ['class' => 'btn btn-primary form-control']) !!}
 		</div>
 
 	{!! Form::close() !!}

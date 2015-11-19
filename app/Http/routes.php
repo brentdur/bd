@@ -17,6 +17,10 @@ Route::get('/', function () {
 
 Route::resource('employment', 'EmploymentController');
 Route::resource('skill', 'SkillController');
+Route::resource('project', 'ProjectController');
+Route::resource('honor', 'HonorController');
+Route::resource('contact', 'ContactController');
+Route::resource('education', 'EducationController');
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

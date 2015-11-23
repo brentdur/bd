@@ -12,7 +12,7 @@ class CreateEducationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('educations', function (Blueprint $table) {
+        Schema::create('education', function (Blueprint $table) {
             $table->increments('id');
             $table->string('where');
             $table->text('description');
@@ -27,6 +27,6 @@ class CreateEducationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('educations');
+        Schema::dropIfExists('education');
     }
 }
